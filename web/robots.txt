@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /runtime/
+Disallow: /vendor/
+
+Sitemap: https://njinteriors.in/sitemap.xml

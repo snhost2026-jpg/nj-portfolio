@@ -1,0 +1,140 @@
+/* ==========================================================================
+   NJ INTERIORS — FLUID MOTION, CUSTOM CURSOR & SCROLL CHOREOGRAPHY STYLES
+   ========================================================================== */
+
+/* Custom Cursor (Desktop devices with fine pointer) */
+@media (pointer: fine) {
+    .nj-cursor-dot,
+    .nj-cursor-ring {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 10030;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .nj-cursor-dot {
+        width: 6px;
+        height: 6px;
+        background-color: var(--nj-bronze);
+        transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .nj-cursor-ring {
+        width: 38px;
+        height: 38px;
+        border: 1px solid rgba(197, 155, 87, 0.55);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                    height 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                    background-color 0.3s ease,
+                    border-color 0.3s ease;
+    }
+
+    .nj-cursor-ring.has-label {
+        width: 86px;
+        height: 86px;
+        background-color: rgba(14, 13, 11, 0.88);
+        border-color: var(--nj-bronze);
+    }
+
+    .nj-cursor-label {
+        font-family: var(--nj-font-sans);
+        font-size: 0.58rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        color: var(--nj-bronze-champagne);
+        text-transform: uppercase;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        text-align: center;
+    }
+
+    .nj-cursor-ring.has-label .nj-cursor-label {
+        opacity: 1;
+    }
+}
+
+@media (pointer: coarse) {
+    .nj-cursor-dot,
+    .nj-cursor-ring,
+    .nj-cursor-floating-preview {
+        display: none !important;
+    }
+}
+
+/* Line, Word & Character Reveal Primitives */
+.nj-line-wrap {
+    display: block;
+    overflow: hidden;
+}
+
+.nj-line-inner {
+    display: block;
+    will-change: transform, opacity;
+}
+
+.nj-char {
+    display: inline-block;
+    will-change: transform, opacity;
+}
+
+.nj-scrub-word {
+    display: inline-block;
+    will-change: transform, opacity;
+}
+
+#heroBrandTitle {
+    perspective: 900px;
+}
+
+#companyVideoFrame {
+    transform-style: preserve-3d;
+    will-change: clip-path, transform;
+}
+
+/* Smooth GPU acceleration hints for scroll-animated components */
+.nj-section-label,
+.nj-section-headline,
+.nj-section-header-note,
+.nj-lead-paragraph,
+.nj-body-paragraph,
+.nj-editorial-quote-box,
+.nj-expertise-panel,
+.nj-project-card,
+.nj-fandeck-card,
+.nj-coverflow-card,
+.nj-v-timeline-item,
+.nj-process-stage,
+.nj-contact-lift-card,
+.nj-contact-brand-card,
+.nj-enquiry-form-shell,
+.nj-footer-brand-lockup,
+.nj-about-primary-img-wrap,
+.nj-about-secondary-img-wrap,
+.nj-founder-portrait-frame,
+.nj-collab-image-monolith {
+    will-change: transform, opacity, clip-path;
+}
+
+/* Subtle idle ambient float for hero monolith inner image */
+@keyframes njSubtleFloat {
+    0%, 100% {
+        transform: scale(1.04) translateY(0px);
+    }
+    50% {
+        transform: scale(1.07) translateY(-7px);
+    }
+}
+
+.nj-hero-monolith-img {
+    animation: njSubtleFloat 8s ease-in-out infinite;
+}
+
+[data-clip-reveal] {
+    will-change: clip-path, transform;
+}
