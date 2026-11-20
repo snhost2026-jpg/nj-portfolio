@@ -182,6 +182,9 @@ $projects = [
             <div class="nj-hero-showcase-row">
                 <!-- Left Flank -->
                 <div class="nj-hero-flank-left nj-hero-reveal-meta" id="heroFlankLeft">
+                    <div class="nj-hero-side-three-wrap" aria-hidden="true">
+                        <canvas id="heroThreeCanvas" class="nj-hero-three-canvas"></canvas>
+                    </div>
                     <div class="nj-stacked-keywords">
                         <span>SPACES.</span>
                         <span>CRAFT.</span>
@@ -194,7 +197,7 @@ $projects = [
                     <div class="nj-hero-signature-mark">Nitesh Jangda</div>
                 </div>
 
-                <!-- Center Architectural Portal (Smoothly Expands on Scroll) -->
+                <!-- Center Architectural Portal (Clean, Unobstructed Interior Photograph) -->
                 <div class="nj-hero-portal-col" id="heroForegroundLayer">
                     <div class="nj-hero-monolith-card" id="heroMonolithCard" data-cursor-label="SCROLL TO ENTER">
                         <img src="<?= Html::encode($imgLiving) ?>"
@@ -202,7 +205,6 @@ $projects = [
                              class="nj-hero-monolith-img"
                              id="heroPortalImg">
                         <div class="nj-hero-monolith-veil"></div>
-                        <canvas id="heroThreeCanvas" class="nj-hero-three-canvas" aria-hidden="true"></canvas>
                         <div class="nj-hero-monolith-badge">
                             <span>01 // SIGNATURE RESIDENCE</span>
                             <span>SCROLL TO EXPAND &darr;</span>

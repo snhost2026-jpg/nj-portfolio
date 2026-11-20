@@ -10,6 +10,12 @@
     'use strict';
 
     window.NJApp = window.NJApp || {};
+    // Force page refresh to always start at the top instead of restoring previous scroll offset
+    if ('scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
     // Note: Windows "MinAnimate = 0" sets OS prefers-reduced-motion to true even when
     // users want full web animations. Only disable motion if explicitly requested via URL (?reducedMotion=1).
     const prefersReducedMotion = window.location.search.indexOf('reducedMotion=1') !== -1;
@@ -162,20 +168,20 @@
        ---------------------------------------------------------------------- */
     function initHeroThreeScene() {
         const canvas = document.getElementById('heroThreeCanvas');
-        const card = document.getElementById('heroMonolithCard');
-        if (!canvas || !card || prefersReducedMotion || typeof window.THREE === 'undefined') {
+        const wrap = canvas ? canvas.parentElement : null;
+        if (!canvas || !wrap || prefersReducedMotion || typeof window.THREE === 'undefined') {
             return;
         }
 
         try {
             const THREE = window.THREE;
-            const rect = card.getBoundingClientRect();
-            const width = rect.width || 640;
-            const height = rect.height || 384;
+            const rect = wrap.getBoundingClientRect();
+            const width = rect.width || 190;
+            const height = rect.height || 135;
 
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(38, width / height, 0.1, 100);
-            camera.position.set(0, 0.3, 6.8);
+            camera.position.set(0, 0.3, 6.2);
 
             const renderer = new THREE.WebGLRenderer({
                 canvas: canvas,
@@ -250,7 +256,7 @@
             }, { passive: true });
 
             window.addEventListener('resize', function () {
-                const r = card.getBoundingClientRect();
+                const r = wrap.getBoundingClientRect();
                 if (r.width > 0 && r.height > 0) {
                     camera.aspect = r.width / r.height;
                     camera.updateProjectionMatrix();
@@ -271,11 +277,20 @@
         }
     }
 
+    window.addEventListener('beforeunload', function () {
+        window.scrollTo(0, 0);
+    });
+
     document.addEventListener('DOMContentLoaded', function () {
-        initSmoothScroll();
+        window.scrollTo(0, 0);
+        const lenis = initSmoothScroll();
+        if (lenis) {
+            lenis.scrollTo(0, { immediate: true });
+        }
         initNavigation();
         initHeroThreeScene();
         initPreloader(function () {
+            window.scrollTo(0, 0);
             document.dispatchEvent(new CustomEvent('nj:preloaderComplete'));
         });
     });
