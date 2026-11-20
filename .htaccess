@@ -1,0 +1,13 @@
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Block direct web access to Yii2 internal directories & files
+    RewriteRule ^(assets|commands|config|controllers|mail|models|runtime|tests|vagrant|vendor|views|Requirements)(/.*)?$ - [F,L,NC]
+    RewriteRule ^(composer\.(json|lock)|yii(\.bat)?|phpstan\.neon|phpcs\.xml\.dist|codeception\.yml|docker-compose\.yml|Vagrantfile|c3\.php)$ - [F,L,NC]
+
+    # Route all requests cleanly into the /web directory
+    RewriteCond %{REQUEST_URI} !^/web/
+    RewriteRule ^(.*)$ web/$1 [L]
+</IfModule>

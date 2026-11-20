@@ -1,4 +1,15 @@
-RewriteEngine on
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule . index.php [L]
+Options -Indexes
+DirectoryIndex index.php
+
+<IfModule mod_mime.c>
+    AddType image/webp .webp
+    AddType video/webm .webm
+    AddType image/svg+xml .svg
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . index.php [L]
+</IfModule>
